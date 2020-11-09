@@ -1,12 +1,13 @@
 package ohtu.verkkokauppa;
+import ohtu.verkkokauppa.interfaces.*;
 
 import java.util.*;
 
-public class Varasto {
+public class Varasto implements VarastoInterface {
 
     private static Varasto instanssi;
 
-    public static Varasto getInstance() {
+    public static VarastoInterface getInstance() {
         if (instanssi == null) {
             instanssi = new Varasto();
         }
@@ -15,16 +16,16 @@ public class Varasto {
     }
     
     private Kirjanpito kirjanpito;
-    private HashMap<Tuote, Integer> saldot;  
+    private HashMap<TuoteInterface, Integer> saldot;  
     
     private Varasto() {
         kirjanpito = Kirjanpito.getInstance();
-        saldot = new HashMap<Tuote, Integer>();
+        saldot = new HashMap<TuoteInterface, Integer>();
         alustaTuotteet();
     }
             
-    public Tuote haeTuote(int id){
-        for (Tuote t : saldot.keySet()) {
+    public TuoteInterface haeTuote(int id){
+        for (TuoteInterface t : saldot.keySet()) {
             if ( t.getId()==id) return t;
         }
         
@@ -35,12 +36,12 @@ public class Varasto {
         return saldot.get(haeTuote(id));
     }
     
-    public void otaVarastosta(Tuote t){        
+    public void otaVarastosta(TuoteInterface t){        
         saldot.put(t,  saldo(t.getId())-1 );
         kirjanpito.lisaaTapahtuma("otettiin varastosta "+t);
     }
     
-    public void palautaVarastoon(Tuote t){
+    public void palautaVarastoon(TuoteInterface t){
         saldot.put(t,  saldo(t.getId())+1 );
         kirjanpito.lisaaTapahtuma("palautettiin varastoon "+t);
     }    

@@ -1,11 +1,12 @@
 package ohtu.verkkokauppa;
+import ohtu.verkkokauppa.interfaces.*;
 
 public class Kauppa {
 
-    private Varasto varasto;
-    private Pankki pankki;
+    private VarastoInterface varasto;
+    private PankkiInterface pankki;
     private Ostoskori ostoskori;
-    private Viitegeneraattori viitegeneraattori;
+    private ViitegeneraattoriInterface viitegeneraattori;
     private String kaupanTili;
 
     public Kauppa() {
@@ -20,13 +21,13 @@ public class Kauppa {
     }
 
     public void poistaKorista(int id) {
-        Tuote t = varasto.haeTuote(id); 
+        TuoteInterface t = varasto.haeTuote(id); 
         varasto.palautaVarastoon(t);
     }
 
     public void lisaaKoriin(int id) {
         if (varasto.saldo(id)>0) {
-            Tuote t = varasto.haeTuote(id);             
+            TuoteInterface t = varasto.haeTuote(id);             
             ostoskori.lisaa(t);
             varasto.otaVarastosta(t);
         }

@@ -1,10 +1,11 @@
 package ohtu.verkkokauppa;
+import ohtu.verkkokauppa.interfaces.*;
 
-public class Pankki {
+public class Pankki implements PankkiInterface {
 
     private static Pankki instanssi;
 
-    public static Pankki getInstance() {
+    public static PankkiInterface getInstance() {
         if (instanssi == null) {
             instanssi = new Pankki();
         }
