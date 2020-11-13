@@ -44,7 +44,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return name + " team " + team + " goals " + goals + " assists " + assists;
+        return getName() + " team " + getTeam() + " goals " + getGoals() + " assists " + getAssists();
     }
       
 }
