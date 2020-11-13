@@ -20,8 +20,11 @@ public class Main {
         Gson mapper = new Gson();
         Player[] players = mapper.fromJson(bodyText, Player[].class);
 
-        Player[] finnishPlayers = Arrays.stream(players)
-                .filter(player -> player.getNationality().equals("FIN")).toArray(player -> new Player[player]);
+        List<Player> finnishPlayers = Arrays.stream(players)
+                .filter(player -> player.getNationality().equals("FIN"))
+                .sorted((player1, player2) ->
+                        (player2.getAssists() + player2.getGoals()) - (player1.getAssists() + player1.getGoals()))
+                .collect(Collectors.toList());
 
         System.out.println("Oliot:");
         for (Player player : finnishPlayers) {
