@@ -43,6 +43,15 @@ public class Stepdefs {
     @Then("system will respond with {string}")
     public void systemWillRespondWith(String expectedOutput) {
         assertTrue(io.getPrints().contains(expectedOutput));
-    }    
+    }
 
+    @When ("username {string} and wrong password {string} are entered")
+    public void wrongPasswordEntered(String username, String password) {
+        inputLines.add(username);
+        inputLines.add(password);
+
+        io = new StubIO(inputLines);
+        app = new App(io, auth);
+        app.run();
+    }
 }
