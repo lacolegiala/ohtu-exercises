@@ -54,4 +54,20 @@ public class Stepdefs {
         app = new App(io, auth);
         app.run();
     }
+
+    @Given ("command new is selected")
+    public void newIsSelected() {
+        inputLines.add("new");
+    }
+
+    @When ("new username {string} and password {string}")
+    public void validUsername(String username, String password) {
+        inputLines.add(username);
+        inputLines.add(password);
+
+        io = new StubIO(inputLines);
+        app = new App(io, auth);
+        app.run();
+    }
+
 }
