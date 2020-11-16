@@ -60,7 +60,7 @@ public class Stepdefs {
         inputLines.add("new");
     }
 
-    @When ("new username {string} and password {string}")
+    @When ("new username {string} and password {string} are entered")
     public void validUsername(String username, String password) {
         inputLines.add(username);
         inputLines.add(password);
@@ -70,4 +70,9 @@ public class Stepdefs {
         app.run();
     }
 
+    @Given("user {string} with password {string} is created")
+    public void userWithPasswordIsCreated(String username, String password) {
+        newIsSelected();
+        validUsername(username, password);
+    }
 }
