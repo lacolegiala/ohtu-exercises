@@ -1,5 +1,7 @@
 .tmp*
 
-*build/
+**/build/
 
 *.gradle/
+
+*.idea/
