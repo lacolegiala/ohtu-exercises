@@ -48,5 +48,13 @@ public class KassapaateTest {
 
         verify(kortti, times(1)).lataa(5);
     }
+
+    @Test
+    public void noMoneyGetsAddedIfSumIsNegative() {
+        when(kortti.getSaldo()).thenReturn(5);
+        kassa.lataa(kortti, -1);
+
+        verify(kortti, times(0)).lataa(-1);
+    }
       
 }
