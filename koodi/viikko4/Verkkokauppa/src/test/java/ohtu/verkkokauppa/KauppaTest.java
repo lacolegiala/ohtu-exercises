@@ -50,7 +50,7 @@ public class KauppaTest {
     }
 
     @Test
-    public void afterTwoPurchasesPankkiMethodTilisiirtoGetsCalledWithRightParameters() {
+    public void afterTwoDifferentPurchasesPankkiMethodTilisiirtoGetsCalledWithRightParameters() {
         when(viite.uusi()).thenReturn(42);
 
         when(varasto.saldo(1)).thenReturn(10);
