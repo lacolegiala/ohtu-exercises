@@ -67,4 +67,21 @@ public class KauppaTest {
 
         verify(pankki).tilisiirto("pekka", 42, "12345", "33333-44455", 8);
     }
+
+    @Test
+    public void afterDoublePurchasePankkiMethodTilisiirtoGetsCalledWithRightParameters() {
+        when(viite.uusi()).thenReturn(42);
+
+        when(varasto.saldo(1)).thenReturn(10);
+        when(varasto.haeTuote(1)).thenReturn(new Tuote(1, "maito", 5));
+
+        Kauppa k = new Kauppa(varasto, pankki, viite);
+
+        k.aloitaAsiointi();
+        k.lisaaKoriin(1);
+        k.lisaaKoriin(1);
+        k.tilimaksu("pekka", "12345");
+
+        verify(pankki).tilisiirto("pekka", 42, "12345", "33333-44455", 10);
+    }
 }
