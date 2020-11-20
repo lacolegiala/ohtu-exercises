@@ -13,7 +13,7 @@ public class Kassapaate {
     }
     
     public void ostaLounas(Maksukortti kortti) {
-        if (kortti.saldo >= HINTA) {
+        if (kortti.getSaldo() >= HINTA) {
             kortti.osta(HINTA);
         }
         myytyjaLounaita++;
