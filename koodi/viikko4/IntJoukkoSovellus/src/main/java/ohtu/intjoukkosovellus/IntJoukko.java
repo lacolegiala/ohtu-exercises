@@ -2,12 +2,11 @@ package ohtu.intjoukkosovellus;
 
 public class IntJoukko {
 
-    public final static int CAPACITY = 5, // aloitustalukon koko
-            DEFAULTINCREMENT = 5;  // luotava uusi taulukko on
-    // näin paljon isompi kuin vanha
-    private int incrementSize;     // Uusi taulukko on tämän verran vanhaa suurempi.
-    private int[] queue;      // Joukon luvut säilytetään taulukon alkupäässä. 
-    private int numberOfItems;    // Tyhjässä joukossa alkioiden_määrä on nolla. 
+    public final static int CAPACITY = 5, 
+            DEFAULTINCREMENT = 5;
+    private int incrementSize;    
+    private int[] queue;
+    private int numberOfItems;
 
     public IntJoukko() {
         this(CAPACITY, DEFAULTINCREMENT);
@@ -75,22 +74,22 @@ public class IntJoukko {
         return queue;
     }
 
-    public boolean lisaa(int luku) {
-        if (!kuuluu(luku)) {
-            queue[numberOfItems] = luku;
+    public boolean lisaa(int numberToAdd) {
+        if (!kuuluu(numberToAdd)) {
+            queue[numberOfItems] = numberToAdd;
             numberOfItems++;
             if (numberOfItems % queue.length == 0) {
-                int[] taulukkoOld = queue;
+                int[] oldArray = queue;
                 queue = new int[numberOfItems + incrementSize];
-                kopioiTaulukko(taulukkoOld, queue);
+                kopioiTaulukko(oldArray, queue);
             }
             return true;
         }
         return false;
     }
 
-    public boolean kuuluu(int luku) {
-        if (location(luku) == -1) {
+    public boolean kuuluu(int number) {
+        if (location(number) == -1) {
             return false;
         }
         return true;
@@ -105,10 +104,10 @@ public class IntJoukko {
         return -1;
     }
 
-    public boolean poista(int luku) {
-        int kohta = location(luku);
-        if (kohta != -1) {
-            for (int j = kohta; j < numberOfItems - 1; j++) {
+    public boolean poista(int numberToRemove) {
+        int locationOfItemToRemove = location(numberToRemove);
+        if (locationOfItemToRemove != -1) {
+            for (int j = locationOfItemToRemove; j < numberOfItems - 1; j++) {
                 queue[j] = queue[j + 1];
             }
             numberOfItems--;
@@ -118,9 +117,9 @@ public class IntJoukko {
         return false;
     }
 
-    private void kopioiTaulukko(int[] vanha, int[] uusi) {
-        for (int i = 0; i < vanha.length; i++) {
-            uusi[i] = vanha[i];
+    private void kopioiTaulukko(int[] oldArray, int[] newArray) {
+        for (int i = 0; i < oldArray.length; i++) {
+            newArray[i] = oldArray[i];
         }
 
     }
@@ -131,24 +130,24 @@ public class IntJoukko {
 
     @Override
     public String toString() {
-        String tuotos = "{";
+        String arrayAsString = "{";
         for (int i = 0; i < numberOfItems - 1; i++) {
-            tuotos += queue[i];
-            tuotos += ", ";
+            arrayAsString += queue[i];
+            arrayAsString += ", ";
         }
         if (numberOfItems > 0) {
-            tuotos += queue[numberOfItems - 1];
+            arrayAsString += queue[numberOfItems - 1];
         }
-        tuotos += "}";
-        return tuotos;
+        arrayAsString += "}";
+        return arrayAsString;
     }
 
     public int[] toIntArray() {
-        int[] taulu = new int[numberOfItems];
-        for (int i = 0; i < taulu.length; i++) {
-            taulu[i] = queue[i];
+        int[] array = new int[numberOfItems];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = queue[i];
         }
-        return taulu;
+        return array;
     }
 
 }
