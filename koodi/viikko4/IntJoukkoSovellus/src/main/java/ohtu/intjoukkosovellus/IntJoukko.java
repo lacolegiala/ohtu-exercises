@@ -10,19 +10,11 @@ public class IntJoukko {
     private int numberOfItems;    // Tyhjässä joukossa alkioiden_määrä on nolla. 
 
     public IntJoukko() {
-        queue = createQueue(CAPACITY);
-        numberOfItems = 0;
-        this.incrementSize = DEFAULTINCREMENT;
+        this(CAPACITY, DEFAULTINCREMENT);
     }
 
     public IntJoukko(int capacity) {
-        if (capacity < 0) {
-            return;
-        }
-        queue = createQueue(capacity);
-        numberOfItems = 0;
-        this.incrementSize = DEFAULTINCREMENT;
-
+        this(capacity, DEFAULTINCREMENT);
     }
 
 
@@ -40,41 +32,39 @@ public class IntJoukko {
     }
 
     public static IntJoukko yhdiste(IntJoukko firstIntSet, IntJoukko secondIntSet) {
-        IntJoukko intSet = new IntJoukko();
+        IntJoukko finalIntSet = new IntJoukko();
         for (int i = 0; i < firstIntSet.numberOfItems; i++) {
-            intSet.lisaa(firstIntSet.queue[i]);
+            finalIntSet.lisaa(firstIntSet.queue[i]);
         }
         for (int i = 0; i < secondIntSet.numberOfItems; i++) {
-            intSet.lisaa(secondIntSet.queue[i]);
+            finalIntSet.lisaa(secondIntSet.queue[i]);
         }
-        return intSet;
+        return finalIntSet;
     }
 
     public static IntJoukko leikkaus(IntJoukko firstIntSet, IntJoukko secondIntSet) {
-        IntJoukko intSet = new IntJoukko();
+        IntJoukko finalIntSet = new IntJoukko();
         for (int i = 0; i < firstIntSet.numberOfItems; i++) {
             for (int j = 0; j < secondIntSet.numberOfItems; j++) {
                 if (firstIntSet.queue[i] == secondIntSet.queue[j]) {
-                    intSet.lisaa(secondIntSet.queue[j]);
+                    finalIntSet.lisaa(secondIntSet.queue[j]);
                 }
             }
         }
-        return intSet;
+        return finalIntSet;
 
     }
 
-    public static IntJoukko erotus(IntJoukko a, IntJoukko b) {
-        IntJoukko z = new IntJoukko();
-        int[] arrayA = a.toIntArray();
-        int[] arrayB = b.toIntArray();
-        for (int i = 0; i < arrayA.length; i++) {
-            z.lisaa(arrayA[i]);
+    public static IntJoukko erotus(IntJoukko firstIntSet, IntJoukko secondIntSet) {
+        IntJoukko finalIntSet = new IntJoukko();
+        for (int i = 0; i < firstIntSet.numberOfItems; i++) {
+            finalIntSet.lisaa(firstIntSet.queue[i]);
         }
-        for (int i = 0; i < arrayB.length; i++) {
-            z.poista(arrayB[i]);
+        for (int i = 0; i < secondIntSet.numberOfItems; i++) {
+            finalIntSet.poista(secondIntSet.queue[i]);
         }
 
-        return z;
+        return finalIntSet;
     }
 
     private int[] createQueue(int capacity) {
