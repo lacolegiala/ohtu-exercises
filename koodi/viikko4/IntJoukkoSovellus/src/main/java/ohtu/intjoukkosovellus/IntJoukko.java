@@ -19,10 +19,10 @@ public class IntJoukko {
 
     public IntJoukko(int capacity, int incrementSize) {
         if (capacity < 0) {
-            throw new IllegalArgumentException("Kapasiteetti väärin");//heitin vaan jotain :D
+            throw new IllegalArgumentException("Kapasiteetti on väärin");//heitin vaan jotain :D
         }
         if (incrementSize < 0) {
-            throw new IllegalArgumentException("Kasvatuskoko väärin");//heitin vaan jotain :D
+            throw new IllegalArgumentException("Kasvatuskoko on väärin");//heitin vaan jotain :D
         }
         queue = createQueue(capacity);
         numberOfItems = 0;
