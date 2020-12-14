@@ -5,6 +5,14 @@ package ohtu.kivipaperisakset;
 public class KPSParempiTekoaly extends RockPaperScissors {
     private TekoalyParannettu tekoaly = new TekoalyParannettu(20);
 
+    private KPSParempiTekoaly() {
+
+    }
+
+    public static KPSParempiTekoaly createGame() {
+        return new KPSParempiTekoaly();
+    }
+
     @Override
     protected String toisenSiirto(String firstMove) {
         String secondMove = tekoaly.annaSiirto();
