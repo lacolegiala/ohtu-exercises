@@ -13,7 +13,7 @@ public abstract class RockPaperScissors {
 
         String ekanSiirto = ensimmaisenSiirto();
         System.out.print("Toisen pelaajan siirto: ");
-        String tokanSiirto = toisenSiirto();
+        String tokanSiirto = toisenSiirto(ekanSiirto);
 
         while (onkoOkSiirto(ekanSiirto) && onkoOkSiirto(tokanSiirto)) {
             tuomari.kirjaaSiirto(ekanSiirto, tokanSiirto);
@@ -23,7 +23,7 @@ public abstract class RockPaperScissors {
             ekanSiirto = ensimmaisenSiirto();
 
             System.out.println("Toisen pelaajan siirto: ");
-            tokanSiirto = toisenSiirto();
+            tokanSiirto = toisenSiirto(ekanSiirto);
         }
 
         System.out.println();
@@ -37,7 +37,7 @@ public abstract class RockPaperScissors {
     }
 
     // tämä on abstrakti metodi sillä sen toteutus vaihtelee eri pelityypeissä
-    abstract protected String toisenSiirto();
+    abstract protected String toisenSiirto(String firstMove);
 
     protected static boolean onkoOkSiirto(String siirto) {
         return "k".equals(siirto) || "p".equals(siirto) || "s".equals(siirto);
